@@ -2,7 +2,7 @@
 # 📘 COVID-19 Vaccination Data Engineering Project – Comprehension Journal
 
 **🗓️ Project Duration:** May 2025  
-**👤 Author:** [Your Name]  
+**👤 Author:** Ayub Khan  
 **📌 Dataset:** OWID COVID-19 Vaccination Data
 
 ---
