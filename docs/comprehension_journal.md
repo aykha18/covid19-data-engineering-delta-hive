@@ -27,6 +27,7 @@ The project aimed to implement a medallion architecture using **Azure Databricks
 
 ### ✅ Day 1: Project Setup
 - **What worked:** Manual creation of Unity Catalog metastore from Azure UI.
+Used this video to create metastore https://www.youtube.com/watch?v=4uKRzDf0zIc
 - **Challenge:** Automating ingestion from GitHub failed due to malformed CSV.
 - **Resolution:** Switched to manual upload to raw container.
 
