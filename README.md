@@ -1,65 +1,102 @@
 
-# COVID-19 Data Engineering Project
+# Delta Lake Project: COVID-19 Vaccination Data Pipeline
 
-This project is an end-to-end data engineering pipeline built using **Azure Data Lake**, **Apache Spark (Databricks)**, **Delta Lake**, and **Apache Hive**, focusing on global COVID-19 data. It demonstrates how to ingest, clean, transform, and query data efficiently at scale.
+## 📊 Project Overview
+This project demonstrates a complete Delta Lake pipeline using Databricks Unity Catalog with Bronze, Silver, and Gold tables for processing and analyzing global COVID-19 vaccination data.
 
-## 🚀 Project Goals
-
-- Ingest COVID-19 data from [Our World in Data](https://github.com/owid/covid-19-data)
-- Store data in a multi-layer Delta Lake architecture: Bronze → Silver → Gold
-- Transform and analyze the data using PySpark on Azure Databricks
-- Query data using Apache Hive tables on Delta format
-- Document and visualize results using notebooks and Power BI
-
-## 🗂️ Project Structure
+## 🧱 Architecture
 
 ```
-📁 covid19-data-engineering-delta-hive/
-├── notebooks/           # Databricks notebooks (ETL, exploration, visualizations)
-├── data-samples/        # Raw and cleaned sample data
-│   ├── raw/
-│   └── cleaned/
-├── scripts/             # Helper PySpark scripts and jobs
-├── images/              # Diagrams and architecture screenshots
-├── docs/                # Project journal and documentation
-├── README.md
+Raw (CSV Uploads) → Bronze (Ingestion) → Silver (Transformations & Cleaning) → Gold (Aggregations & Insights)
 ```
 
-## 🛠️ Technologies Used
+          +----------------+
+           |  Raw CSV Files |
+           +----------------+
+                   |
+                   v
+           +----------------+
+           |   Bronze Layer |
+           | (Raw Ingested) |
+           +----------------+
+                   |
+                   v
+           +----------------+
+           |   Silver Layer |
+           | (Cleaned &     |
+           |  Filtered)     |
+           +----------------+
+                   |
+                   v
+           +----------------+
+           |    Gold Layer  |
+           | (Aggregated &  |
+           |  BI Ready)     |
+           +----------------+
+---
 
-- Azure Data Lake Storage (ADLS Gen2)
-- Azure Databricks (PySpark, Delta Lake)
-- Apache Hive
-- Power BI or Databricks Notebooks for Visualization
-- Git/GitHub for version control
+## 🗂️ Unity Catalog Structure
 
-## 📊 Dataset Source
+- **Catalog**: `databricks_cat`
+- **Schemas**:
+  - `raw`: CSV files
+  - `bronze`: Ingested Delta tables
+  - `silver`: Cleaned and transformed data
+  - `gold`: Analytical gold tables
 
-- COVID-19 Dataset from [Our World in Data](https://github.com/owid/covid-19-data)
-- File: `owid-covid-data.csv` (contains global cases, testing, deaths, vaccination metrics)
+## 🏗️ Delta Lake Features Used
 
-## 📅 Project Plan (10-Day Sprint)
+- **ACID transactions** with Delta Lake
+- **Time travel** and versioning
+- **Schema evolution** with evolving input data
+- **Upserts/Merge** for incremental loads
+- **Data cleanup** with `VACUUM`
 
-| Day | Task |
-|-----|------|
-| 1   | Project setup + dataset exploration |
-| 2   | Azure environment setup (Storage, Databricks) |
-| 3   | Bronze layer ingestion |
-| 4   | Silver layer transformation |
-| 5   | Gold layer aggregation |
-| 6   | Hive table creation and querying |
-| 7   | Delta Lake features (time travel, schema evolution) |
-| 8   | Visualization & dashboard |
-| 9   | Final documentation |
-| 10  | Testing, optimization, GitHub publishing |
+---
 
-## ✅ Outcomes
+## 🔍 Gold Layer Visualizations
 
-- End-to-end data pipeline on Azure with open lakehouse architecture
-- Cleaned and versioned COVID-19 dataset stored as Delta tables
-- Hive-accessible analytics-ready tables
-- GitHub-hosted public portfolio project
+1. **Total Vaccinations by Country (Latest Month)**  
+2. **Vaccination Trends Over Time (Top 3 Countries)**  
+3. **Vaccination by Manufacturer (via Joins)**  
 
-## 📜 License
+*All plots are rendered using Python (matplotlib/seaborn) or can be connected via Power BI for dashboards.*
 
-This project is open-source and available under the MIT License.
+---
+
+## 🔁 Delta Table Operations
+
+- Schema enforcement
+- Merge/Upsert logic
+- Time-travel queries using `timestampAsOf` and `versionAsOf`
+
+## 🧹 Maintenance
+
+- Vacuum unused files with retention override
+```python
+spark.conf.set("spark.databricks.delta.retentionDurationCheck.enabled", "false")
+deltaTable.vacuum(0)  # Run with caution
+```
+
+---
+
+## 📈 Future Enhancements
+
+- Power BI / Tableau integration with `gold` layer
+- ML integration using `silver` or `gold` data
+- Real-time streaming ingestion into `bronze`
+
+---
+
+## 🚀 Usage
+
+Use this project to demonstrate:
+- Your data engineering skills with Delta Lake
+- Best practices with Databricks and Unity Catalog
+- Real-world handling of public health datasets
+
+---
+
+## 🧠 Credits
+
+Data Source: [Our World in Data - COVID-19 Vaccination](https://ourworldindata.org/covid-vaccinations)
