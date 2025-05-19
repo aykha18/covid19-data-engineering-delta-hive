@@ -100,3 +100,12 @@ Use this project to demonstrate:
 ## 🧠 Credits
 
 Data Source: [Our World in Data - COVID-19 Vaccination](https://ourworldindata.org/covid-vaccinations)
+
+---
+
+## 📬 Contact
+
+If you found this project helpful or want to collaborate, feel free to connect:
+
+- 💼 LinkedIn: Ayub Khan https://www.linkedin.com/in/ayub-khan-85073556/
+- 📧 Email: khanayubchand@gmail.com
